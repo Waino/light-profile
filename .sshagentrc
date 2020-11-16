@@ -1,0 +1,41 @@
+#############################################################
+# The following section allows passwordfree logins over ssh #
+#############################################################
+
+SSH_ENV=$HOME/.ssh/environment
+
+function start_agent {
+echo "Initialising new SSH agent..."
+/usr/bin/ssh-agent | sed 's/^echo/#echo/' > ${SSH_ENV}
+echo succeeded
+chmod 600 ${SSH_ENV}
+. ${SSH_ENV} > /dev/null
+/usr/bin/ssh-add 2> /dev/null;
+}
+
+# Source SSH settings, if applicable
+
+if [[ -n "${SSH_AUTH_SOCK}" ]]
+then
+    # ssh-agent is started automatically, only need to add keys
+    ssh-add -l | grep id_rsa > /dev/null
+    if [[ $? -ne 0  && -n "${SSH_AUTH_SOCK}" ]]
+    then
+        /usr/bin/ssh-add 2> /dev/null;
+    fi
+else
+    if [ -f "${SSH_ENV}" ]
+    then
+        . ${SSH_ENV} > /dev/null
+        ps ${SSH_AGENT_PID} | grep ssh > /dev/null
+        if [ $? -ne 0 ]
+        then
+            start_agent
+        fi
+    else
+        start_agent
+    fi
+fi
+
+# Exit value must be success
+true

@@ -1,0 +1,61 @@
+*Font: -*-fixed-bold-r-normal-*-*-*-*-*-*-*-*-*
+!*Font: -*-terminus-bold-r-normal-*-*-*-*-*-*-*-*-u
+URxvt.font: xft:Ubuntu Mono:size=13,xft:Symbola,xft:Noto Emoji:minspace=False
+URxvt.boldFont: xft:Ubuntu Mono:size=13:Bold
+URxvt.italicFont: xft:Ubuntu Mono:size=13:Italic
+URxvt.bolditalicFont: xft:Ubuntu Mono:size=13:Bold:Italic
+
+URxvt*background: Black
+URxvt*foreground: White
+URxvt*visualBell: False
+URxvt*saveLines: 1000
+!# better blues
+URxvt*color4:  #3333AA
+URxvt*color12: #6464FF
+URxvt*color14: #00FFFF
+!# darker yellow
+URxvt.color11 : #E0AF1B
+
+
+!#XTerm*eightBitInput:   false
+XTerm*metaSendsEscape: true
+rxvt*modifier: alt
+URxvt.iso14755 : false
+
+Xmessage*Form*background: black
+Xmessage*Form*Command*background: gray20
+Xmessage*Form*Command*borderColor: gray60
+Xmessage*Form*Command*cornerRoundPercent: 1
+Xmessage*Form*Command*font: fixed
+Xmessage*Form*Command*foreground: gray80
+Xmessage*Form*Command*highlightThickness: 0
+Xmessage*Form*Text*background: black
+Xmessage*Form*Text*scrollVertical: whenNeeded
+!#Xmessage*Form*Text*AsciiSink*font: 8x13
+Xmessage*Form*Text*AsciiSink*foreground: white
+
+
+!# Scrolling on wheel mouse: half a page normally, line per line with shift
+XTerm.vt100.translations: #override\n\
+ Shift<Btn4Down>,<Btn4Up>:scroll-back(1,line)\n\
+ Shift<Btn5Down>,<Btn5Up>:scroll-forw(1,line)\n\
+ Ctrl<Btn4Down>,<Btn4Up>:scroll-back(1,page)\n\
+ Ctrl<Btn5Down>,<Btn5Up>:scroll-forw(1,page)\n\
+ <Btn4Down>,<Btn4Up>:scroll-back(1,halfpage)\n\
+ <Btn5Down>,<Btn5Up>:scroll-forw(1,halfpage)\n\
+
+!# In the scrollbar we map buttons 5 & 4 to 1 and 2 otherwise, core dump
+!# This will move proportionnaly to cursor position but we dont know how to
+!# program the same exact behavior as in the text widget.
+XTerm.vt100.Scrollbar.translations: #override\n\
+ <Btn5Down>: StartScroll(Forward)\n\
+ <Btn4Down>: StartScroll(Backward)\n\
+
+!# 4k screen
+Xft.dpi: 150
+Xft.autohint: 0
+!Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
